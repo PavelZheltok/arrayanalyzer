@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace PZ;
 
@@ -19,5 +20,4 @@ class ArrayAnalyzer
 
         return $analyzer->findMaxDepth($array);
     }
-
 }

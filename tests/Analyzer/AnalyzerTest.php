@@ -1,7 +1,7 @@
 <?php
-
+declare(strict_types=1);
 use PHPUnit\Framework\TestCase;
-use PZ\Analyzer\Analyzer;
+//use PZ\Analyzer\Analyzer;
 use PZ\ArrayAnalyzer;
 
 class AnalyzerTest extends TestCase
