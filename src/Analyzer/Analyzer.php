@@ -9,6 +9,11 @@ class Analyzer
         return $this->findKeysInArray($array, $key);
     }
 
+    public function findMaxDepth(array $array)
+    {
+        return $this->findMaxDepthOfArray($array);
+    }
+
     private function findKeysInArray(array $array, string $key, string $path = '', array $paths = [])
     {
         $currentKeys = array_keys($array);
@@ -32,5 +37,18 @@ class Analyzer
         }
 
         return $paths;
+    }
+
+    private function findMaxDepthOfArray(array $array, int $depth = 1, int $maxDepth = 0): int
+    {
+        foreach ($array as $item) {
+            if (is_array($item)) {
+                $maxDepth = $this->findMaxDepthOfArray($item, $depth + 1, $maxDepth);
+            }
+
+            $maxDepth = ($depth > $maxDepth) ? $depth : $maxDepth;
+        }
+
+        return $maxDepth;
     }
 }
