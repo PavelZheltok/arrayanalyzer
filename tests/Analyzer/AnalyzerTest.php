@@ -19,17 +19,23 @@ class AnalyzerTest extends TestCase
         $array = [1, 2, 3];
         $result = ArrayAnalyzer::findKeysPaths($array, 'somekey');
         $this->assertEmpty($result);
+        $this->assertEquals(1,  ArrayAnalyzer::findMaxDepth($array));
+
         $array2 = ['somekey', 1, 2];
         $result = ArrayAnalyzer::findKeysPaths($array2, 'somekey');
         $this->assertEmpty($result);
+
+        $this->assertEquals(1,  ArrayAnalyzer::findMaxDepth($array));
     }
 
     public function testMultyDimentionalArrayWithoutKey(): void
     {
         $array = [1, 2, 3, [1, 'test', 3]];
         $result = ArrayAnalyzer::findKeysPaths($array, 'somekey');
+        $this->assertEquals(2,  ArrayAnalyzer::findMaxDepth($array));
         $this->assertEmpty($result);
         $array2 = ['somekey', 1, ['test' => ['test' => null]]];
+        $this->assertEquals(3,  ArrayAnalyzer::findMaxDepth($array2));
         $result = ArrayAnalyzer::findKeysPaths($array2, 'somekey');
         $this->assertEmpty($result);
     }
@@ -37,10 +43,12 @@ class AnalyzerTest extends TestCase
     public function testOneDimentionalArrayWitKey(): void
     {
         $array = [1, 2, 'somekey' => 'value'];
+        $this->assertEquals(1,  ArrayAnalyzer::findMaxDepth($array));
         $result = ArrayAnalyzer::findKeysPaths($array, 'somekey');
         $this->assertEquals(['somekey'], $result);
 
         $array2 = ['somekey' => 1, 2];
+        $this->assertEquals(1,  ArrayAnalyzer::findMaxDepth($array2));
         $result = ArrayAnalyzer::findKeysPaths($array2, 'somekey');
         $this->assertEquals(['somekey'], $result);
     }
@@ -142,6 +150,7 @@ class AnalyzerTest extends TestCase
         $this->assertContains('key3.subkey3.ssubkey2.mykey.mykey', $result);
         $this->assertContains('key3.subkey3.ssubkey3.test.test2.mykey', $result);
         $this->assertContains('key4.mykey', $result);
+        $this->assertEquals(10,  ArrayAnalyzer::findMaxDepth($array));
     }
 
 }
