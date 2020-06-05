@@ -7,19 +7,19 @@ class Finder
     /**
      * @param array  $array
      * @param string $key
-     * @param string $path
+     * @param array  $path
      * @param array  $paths
      *
      * @return array
      */
-    public function findKeysInArray(array $array, string $key, string $path = '', array $paths = [])
+    public function findKeysInArray(array $array, string $key, array $path = [], array $paths = [])
     {
         $currentKeys = array_keys($array);
         $startPath = $path;
         foreach ($currentKeys as $currentKey) {
-            $path = $path . '.' . $currentKey;
+            $path[] =  $currentKey;
             if ($currentKey === $key) {
-                $paths[] = trim($path, '.');
+                $paths[] = $path;
                 if (is_array($array[$currentKey]) && [] !== $array[$currentKey]) {
                     $paths = $this->findKeysInArray($array[$currentKey], $key, $path, $paths);
                     continue;

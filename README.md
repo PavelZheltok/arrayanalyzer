@@ -6,8 +6,7 @@ Library for associative arrays analyze
 ###
 Function `findKeysPaths(array $array, string $key)`.
 
-Function returns array with all found keys and their paths. Path is string of joined by dots keys. 
-
+Function returns array with all found keys and their paths. Path is array which items are steps into array.
 Parameters:
 
 `$array` - array for searching
@@ -32,10 +31,19 @@ Output
 ````
 array(2) {
   [0]=>
-  string(6) "mykey1"
+  array(1) {
+    [0]=>
+    string(6) "mykey1"
+  }
   [1]=>
-  string(13) "mykey2.mykey1"
+  array(2) {
+    [0]=>
+    string(6) "mykey2"
+    [1]=>
+    string(6) "mykey1"
+  }
 }
+
 ````
 ###
 Function `findMaxDepth(array $array)`.

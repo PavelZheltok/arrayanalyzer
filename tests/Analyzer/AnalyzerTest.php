@@ -121,25 +121,28 @@ class AnalyzerTest extends TestCase
     {
         $this->assertEquals(1, ArrayAnalyzer::findMaxDepth($this->simpleAssociativeArray1));
         $result = ArrayAnalyzer::findKeysPaths($this->simpleAssociativeArray1, 'somekey');
-        $this->assertEquals(['somekey'], $result);
+        $this->assertEquals([['somekey']], $result);
 
         $this->assertEquals(1, ArrayAnalyzer::findMaxDepth($this->simpleAssociativeArray2));
         $result = ArrayAnalyzer::findKeysPaths($this->simpleAssociativeArray2, 'somekey');
-        $this->assertEquals(['somekey'], $result);
+        $this->assertEquals([['somekey']], $result);
     }
 
     public function testMultyDimentionalArrayWitKey(): void
     {
         $result = ArrayAnalyzer::findKeysPaths($this->simpleAssociativeArray1, 'somekey');
-        $this->assertEquals(['somekey'], $result);
+        $this->assertEquals([['somekey']], $result);
 
         $result = ArrayAnalyzer::findKeysPaths($this->simpleAssociativeArray2, 'somekey');
-        $this->assertEquals(['somekey'], $result);
+        $this->assertEquals([['somekey']], $result);
     }
 
     public function testMyltyDimansionalArrayWithManyKeys(): void
     {
         $result = ArrayAnalyzer::findKeysPaths($this->deepArray, 'mykey');
+        $result = array_map(function ($item) {
+            return implode('.', $item);
+        }, $result);
         $this->assertContains('mykey', $result);
         $this->assertContains('mykey.mykey', $result);
         $this->assertContains('mykey.test.mykey', $result);
