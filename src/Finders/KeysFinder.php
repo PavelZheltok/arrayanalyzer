@@ -1,8 +1,8 @@
 <?php
 
-namespace PZ\Analyzer;
+namespace PZ\Finders;
 
-class Finder
+class KeysFinder
 {
     /**
      * @param array  $array
@@ -20,7 +20,7 @@ class Finder
             $path[] =  $currentKey;
             if ($currentKey === $key) {
                 $paths[] = $path;
-                if (is_array($array[$currentKey]) && [] !== $array[$currentKey]) {
+                if (is_array($array[$currentKey]) && !empty($array[$currentKey])) {
                     $paths = $this->findKeysInArray($array[$currentKey], $key, $path, $paths);
                     continue;
                 }

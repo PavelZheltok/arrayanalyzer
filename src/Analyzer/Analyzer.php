@@ -4,39 +4,19 @@ declare(strict_types=1);
 
 namespace PZ\Analyzer;
 
+use PZ\Finders\KeysFinder;
+
 class Analyzer
 {
-    /**
-     * @var string
-     */
-    private $separator;
-
-    /**
-     * @var string
-     */
-    private $startSymbol;
-
-    /**
-     * @var string
-     */
-    private $endSymbol;
-
-    public function __construct()
-    {
-        $this->separator = '.';
-        $this->startSymbol = '';
-        $this->endSymbol = '';
-    }
-
     /**
      * @param array  $array
      * @param string $key
      *
      * @return array
      */
-    public function findKeys(array $array, string $key)
+    public function findKeys(array $array, string $key): array
     {
-        return (new Finder())->findKeysInArray($array, $key);
+        return (new KeysFinder())->findKeysInArray($array, $key);
     }
 
     /**
@@ -44,8 +24,8 @@ class Analyzer
      *
      * @return int
      */
-    public function findMaxDepth(array $array)
+    public function findMaxDepth(array $array): int
     {
-        return (new Finder())->findMaxDepthOfArray($array);
+        return (new KeysFinder())->findMaxDepthOfArray($array);
     }
 }
